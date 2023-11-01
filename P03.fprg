@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Frank Niroy"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-11-01 04.08.26 PM"/>
+        <attribute name="created" value="RnJhbmsgTmlyb3k7RlJBTks7MjAyMy0xMC0zMTswOS4xNi4yNiBQTTsyNjg1"/>
+        <attribute name="edited" value="RnJhbmsgTmlyb3k7RlJBTks7MjAyMy0xMS0wMTswOC4zOC4wNCBBTTsxO0ZyYW5rIE5pcm95O0ZSQU5LOzIwMjMtMDktMjg7MDguMDQuMDkgUE07cmVrb21lbmRhc2kuZnByZzs3MjM2"/>
+        <attribute name="edited" value="RnJhbmsgTmlyb3k7RlJBTks7MjAyMy0xMS0wMTswNC4wOC4yNiBQTTsxMTsyODM2"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="deskripsi, matkul, tanggal, judul, dosen, status, nim, hasil1" type="String" array="True" size="10"/>
+            <declare name="i, a" type="Integer" array="False" size=""/>
+            <declare name="prioritas" type="Real" array="True" size="10"/>
+            <declare name="tingkat, hari" type="Integer" array="True" size="10"/>
+            <assign variable="i" expression="0"/>
+            <for variable="i" start="0" end="9" direction="inc" step="1">
+                <input variable="deskripsi[i]"/>
+                <if expression="deskripsi[i] = &quot;---&quot;">
+                    <then>
+                        <assign variable="i" expression="10"/>
+                    </then>
+                    <else>
+                        <input variable="nim[i]"/>
+                        <input variable="matkul[i]"/>
+                        <input variable="dosen[i]"/>
+                        <input variable="tanggal[i]"/>
+                        <input variable="judul[i]"/>
+                        <input variable="tingkat[i]"/>
+                        <input variable="hari[i]"/>
+                        <input variable="status[i]"/>
+                        <assign variable="prioritas[i]" expression="tingkat[i]* (1.0/hari[i])"/>
+                        <if expression="prioritas[i] &gt; 3.0">
+                            <then>
+                                <assign variable="hasil1[i]" expression="&quot;Penting! Anda harus mengerjakan tugas ini segera.&quot;"/>
+                            </then>
+                            <else>
+                                <if expression="prioritas[i] &gt;= 1.5 and prioritas[i] &lt;= 3.0">
+                                    <then>
+                                        <assign variable="hasil1[i]" expression="&quot;Tugas ini memiliki prioritas menengah.&quot;"/>
+                                    </then>
+                                    <else>
+                                        <if expression="prioritas[i] &lt; 1.5">
+                                            <then>
+                                                <assign variable="hasil1[i]" expression="&quot;Tugas ini relatif ringan, namun jangan tunda terlalu lama.&quot;"/>
+                                            </then>
+                                            <else/>
+                                        </if>
+                                    </else>
+                                </if>
+                            </else>
+                        </if>
+                        <assign variable="a" expression="i"/>
+                    </else>
+                </if>
+            </for>
+            <for variable="i" start="0" end="a" direction="inc" step="1">
+                <output expression="&quot;Prioritas : &quot; &amp;ToFixed(prioritas[i],2)" newline="True"/>
+                <output expression="deskripsi[i]&amp;&quot;|&quot;&amp;nim[i]&amp;&quot;|&quot;&amp;matkul[i]&amp;&quot;|&quot;&amp;dosen[i]&amp;&quot;|&quot;&amp;tanggal[i]&amp;&quot;|&quot;&amp;judul[i]&amp;&quot;|&quot;&amp;status[i]&amp;&quot;|&quot;&amp;hasil1[i]" newline="True"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
